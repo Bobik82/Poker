@@ -2,8 +2,6 @@
 public class Card {
     int v;
     int c;
-
-    char[] symbols = {'\u2665','\u2666','\u2663','\u2660'};
     public Card(int i, int j)
     {
         this.v=i;
@@ -30,11 +28,12 @@ public class Card {
 
 
         switch (this.c) {
-            case 0 -> System.out.print(symbols[0]);
-            case 1 -> System.out.print(symbols[1]);
-            case 2 -> System.out.print(symbols[2]);
-            case 3 -> System.out.print(symbols[3]);
+            case 0 -> System.out.print("Kier");
+            case 1 -> System.out.print("Karo");
+            case 2 -> System.out.print("Pik");
+            case 3 -> System.out.print("Trefl");
         }
+        System.out.print(" ");
     }
 
 }
