@@ -14,12 +14,6 @@ public class Main {
             if(i%2==1)
                 System.out.println();
         }
-        System.out.println();
-        for(int j=0; j<a.wylosowane.length;j++) {
-            System.out.print(a.wylosowane[j] + " ");
-            if(j%2==1)
-                System.out.println();
-        }
     }
 
 }

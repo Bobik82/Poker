@@ -36,25 +36,33 @@ public class Deck{
         return rand.nextInt(52);
     }
 
-
+    boolean czyWylosowana(int los, int tab[], int ile)
+    {
+        if(ile<0)
+            return false;
+        int i=0;
+        do
+        {
+            if(tab[i] == los)
+                return true;
+            i++;
+        }while(i<ile);
+        return false;
+    }
     public void wylosuj(int ile)
     {
-        int i=0;
+        int wylosowanych=0;
         int los;
         this.wylosowane = new int[ile];
         do
         {
-            los=losuj();
-                if(wylosowane[i]==los)
-                {
-                    los=losuj();
-                }
-                else
-                {
-                    wylosowane[i]=los;
-                }
-                i++;
+          los=losuj();
+           if(czyWylosowana(los, wylosowane, wylosowanych)==false)
+           {
+               wylosowane[wylosowanych]=los;
+               wylosowanych++;
+           }
         }
-        while(i<ile);
+        while(wylosowanych<ile);
     }
 }
