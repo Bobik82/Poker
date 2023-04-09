@@ -5,8 +5,8 @@ public class Main {
         Deck a=new Deck();
 
         a.initDeck();
-       a.showAll();
-        a.wylosuj(4);
+       //a.showAll();
+        a.wylosuj(23);
         System.out.println();
         for(int i=0; i<a.wylosowane.length;i++)
         {
@@ -14,8 +14,12 @@ public class Main {
             if(i%2==1)
                 System.out.println();
         }
-
         System.out.println();
+        for(int j=0; j<a.wylosowane.length;j++) {
+            System.out.print(a.wylosowane[j] + " ");
+            if(j%2==1)
+                System.out.println();
+        }
     }
 
 }

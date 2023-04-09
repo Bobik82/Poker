@@ -40,22 +40,20 @@ public class Deck{
     public void wylosuj(int ile)
     {
         int i=0;
-        int los=losuj();
+        int los;
         this.wylosowane = new int[ile];
         do
         {
-            for(int j=0; j<wylosowane.length;j++)
-            {
-                if(los==wylosowane[j])
+            los=losuj();
+                if(wylosowane[i]==los)
                 {
-                   los=losuj();
+                    los=losuj();
                 }
                 else
                 {
                     wylosowane[i]=los;
-                    i++;
                 }
-            }
+                i++;
         }
         while(i<ile);
     }
