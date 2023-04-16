@@ -3,9 +3,15 @@ import java.awt.*;
 public class tSock {
     public int ID;
     public int[] hand=new int[2];
-    public boolean zajete;
+    public boolean zajete=false;
     public int position;
 
+    public tSock()
+    {
+        ID=999;
+        hand[0]=-1;
+        hand[1]=-1;
+    }
     public tSock(int id)
     {
         ID=id;

@@ -1,7 +1,7 @@
 public class Table {
 
     Deck talia=new Deck();
-    tSock[] miejsce=new tSock[9];
+    tSock[] miejsce;
 
     int []tableCrt=new int[5];
 
@@ -9,6 +9,7 @@ public class Table {
    int ilekart=0;
    public Table(int ile)
    {
+       miejsce=new tSock[ile];
        talia.initDeck();
        for(int i=0;i< ile;i++) {
            miejsce[i] = new tSock(i);
