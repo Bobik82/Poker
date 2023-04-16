@@ -30,6 +30,11 @@ public class Deck{
         }
     }
 
+    public void showCrt(int i)
+    {
+        talia[i].show();
+    }
+
     public int losuj()
     {
         Random rand=new Random();
