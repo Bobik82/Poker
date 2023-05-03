@@ -3,12 +3,32 @@ public class Table {
     Deck talia=new Deck();
     tSock[] miejsce;
 
+    int ilosczajetych;
+    int ID;
+
     int []tableCrt=new int[5];
+
+    float wpisowe;
+
+    float blind;
 
     int cTs=0;
    int ilekart=0;
-   public Table(int ile)
+
+   public Table(int id)
    {
+       ID=id;
+       miejsce=new tSock[2];
+       talia.initDeck();
+       for(int i=0;i< 2;i++) {
+           miejsce[i] = new tSock(i);
+           ilekart = 2 * 2 + 5;
+           cTs=ilekart-5;
+       }
+   }
+   public Table(int id, int ile)
+   {
+       ID=id;
        miejsce=new tSock[ile];
        talia.initDeck();
        for(int i=0;i< ile;i++) {
@@ -16,6 +36,7 @@ public class Table {
            ilekart = ile * 2 + 5;
            cTs=ilekart-5;
        }
+       miejsce[ile-1]=new tSock();
    }
 
    public void rozdajKarty()
@@ -38,15 +59,29 @@ public class Table {
        }
    }
 
+   public void usiadz(int m, Player p)
+   {
+       p.T.miejsce[m]=miejsce[m];
+       miejsce[m].zajete=true;
+       miejsce[m].stack=p.Stack;
+   }
 
+   public void sprawdzMiejsca()
+   {
+       for(int i=0;i<miejsce.length;i++)
+       {
+           if (miejsce[i].zajete)
+               ilosczajetych++;
+       }
+   }
    public void wyswietlMiejsce(int m)
    {
        miejsce[m].status(talia);
-       System.out.println();
+       System.out.println(miejsce[m].stack);
        for(int i=0;i< tableCrt.length;i++)
        {
            talia.showCrt(tableCrt[i]);
-           System.out.print(" ");
+           System.out.println("");
        }
    }
     public void wyswietl()
@@ -55,16 +90,13 @@ public class Table {
         {
             if(miejsce[i]!=null) {
                 miejsce[i].status(talia);
-                System.out.println();
+                System.out.println("");
+
             }
             else
                 System.out.println("Puste miejsce");
         }
 
-        for(int i=0;i< tableCrt.length;i++)
-        {
-            talia.showCrt(tableCrt[i]);
-            System.out.print(" ");
-        }
+
     }
 }
