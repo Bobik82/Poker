@@ -11,7 +11,7 @@ public class Main
         p[4]=new Player(4, "Dupa");
         p[5]=new Player(5, "Chuj");
 
-        g[0]=new Game("Poker Night",12, 2, 1, p);
+        g[0]=new Game("Poker Tight",12, 2, 1, p);
 
 
         p[0].menu(g);
