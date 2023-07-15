@@ -12,13 +12,13 @@ public class Table {
     int cTs;
    int ilekart;
 
-   public Table()
+   public Table(int m)
    {
        idTable=0;
        wpisowe=10;
        blind=2;
        talia.initDeck();
-       seatInit(9);
+       seatInit(m);
    }
 
  /*  public Table(int id, int ile)
@@ -43,6 +43,17 @@ public class Table {
         }
     }
 
+
+    public void losujKolejnosc()
+    {
+        for(int i=0;i<pos.length;i++)
+        {
+            if(pos[i].zajete=true)
+            {
+                pos[i].showMiejsca();
+            }
+        }
+    }
    public void rozdajKarty()
    {
        talia.wylosuj(ilekart);
@@ -68,24 +79,10 @@ public class Table {
        pos[m].zajete=true;
    }
 
-   public void sprawdzMiejsca(tSock pos[], int ilosczajetych)
-   {
-       for(int i=0;i<pos.length;i++)
-       {
-           if (pos[i].zajete)
-           {
-               for (int j = 0; j < tableCrt.length; j++) {
-                   talia.showCrt(tableCrt[j]);
-                   System.out.println("");
-               }
-               ilosczajetych++;
-           }
 
-       }
-   }
    public void wyswietlMiejsce(int m, tSock pos[])
    {
-       pos[m].status(talia);
+       pos[m].status();
        System.out.println(pos[m].stack);
        for(int i=0;i< tableCrt.length;i++)
        {
@@ -97,7 +94,7 @@ public class Table {
     {
             for(int i=0;i<= pos.length;i++)
             {
-                pos[i].status(talia);
+                pos[i].status();
                 System.out.println("");
             }
 

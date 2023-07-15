@@ -21,15 +21,22 @@ public class tSock {
         zajete=true;
     }
 
-    public void status(Deck d)
+    public int status()
+    {
+        int ile=0;
+        if(zajete==true)
+            ile++;
+        return ile;
+    }
+    public void showMiejsca()
     {
         System.out.println("Miejsce: "+ID);
-     if(!zajete)
+     if(zajete)
      {
-         System.out.println("Zajete");
+         System.out.println("Usiadz");
      }
      else
-         System.out.println("Usiadz");
+         System.out.println("Zajete");
     }
     public int showhand(Deck t)
     {
