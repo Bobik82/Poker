@@ -2,13 +2,11 @@
 
 public class tSock {
     public int ID;
+
+    public int posCrt;
     public int[] hand=new int[2];
     public boolean zajete=false;
-    public int position;
-    public float stack;
 
-    public int decyzja;
-    public int zaklad;
 
     public tSock()
     {
@@ -18,20 +16,17 @@ public class tSock {
     public tSock(int id)
     {
         ID=id;
-        zajete=true;
+        zajete=false;
     }
 
-    public int status()
+    public void setPosCrt(int karta)
     {
-        int ile=0;
-        if(zajete==true)
-            ile++;
-        return ile;
+        posCrt=karta;
     }
     public void showMiejsca()
     {
         System.out.println("Miejsce: "+ID);
-     if(zajete)
+     if(!zajete)
      {
          System.out.println("Usiadz");
      }
@@ -43,5 +38,10 @@ public class tSock {
         t.showCrt(hand[0]);
         t.showCrt(hand[1]);
         return 0;
+    }
+
+    public void zajeteERR()
+    {
+        System.out.println("To miejsce jest zjete");
     }
 }

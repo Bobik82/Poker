@@ -2,7 +2,11 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Game g=new Game();
+        Table t=new Table(0, 5);
+        t.usiadz(0);
+        t.usiadz(1);
+        t.infoTable();
+
     }
 }
 
