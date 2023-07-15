@@ -13,26 +13,23 @@ public class tSock {
     public tSock()
     {
         ID=999;
-        hand[0]=-1;
-        hand[1]=-1;
+
     }
     public tSock(int id)
     {
         ID=id;
-        zajete=false;
+        zajete=true;
     }
 
-    public int status(Deck t)
+    public void status(Deck d)
     {
-        if(!this.zajete)
-        {
-            System.out.print("Usiadz");
-        }
-        else
-        {
-                System.out.print("Zajete");
-        }
-        return 0;
+        System.out.println("Miejsce: "+ID);
+     if(!zajete)
+     {
+         System.out.println("Zajete");
+     }
+     else
+         System.out.println("Usiadz");
     }
     public int showhand(Deck t)
     {

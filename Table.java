@@ -1,32 +1,27 @@
 public class Table {
 
-    Deck talia=new Deck();
-    tSock[] miejsce;
-
-    int ilosczajetych;
-    int ID;
-
+   public Deck talia=new Deck();
+    int idTable;
     int []tableCrt=new int[5];
 
+    public tSock []pos;
     float wpisowe;
 
     float blind;
 
-    int cTs=0;
-   int ilekart=0;
+    int cTs;
+   int ilekart;
 
-   public Table(int id)
+   public Table()
    {
-       ID=id;
-       miejsce=new tSock[2];
+       idTable=0;
+       wpisowe=10;
+       blind=2;
        talia.initDeck();
-       for(int i=0;i< 2;i++) {
-           miejsce[i] = new tSock(i);
-           ilekart = 2 * 2 + 5;
-           cTs=ilekart-5;
-       }
+       seatInit(9);
    }
-   public Table(int id, int ile)
+
+ /*  public Table(int id, int ile)
    {
        ID=id;
        miejsce=new tSock[ile];
@@ -37,47 +32,61 @@ public class Table {
            cTs=ilekart-5;
        }
        miejsce[ile-1]=new tSock();
-   }
+   }*/
+
+    void seatInit(int max)
+    {
+        pos=new tSock[max];
+        for(int i=0;i<pos.length;i++)
+        {
+            pos[i]=new tSock(i);
+        }
+    }
 
    public void rozdajKarty()
    {
        talia.wylosuj(ilekart);
        int m=0;
        int k=0;
-       while (m< miejsce.length)
+       while (m< pos.length)
        {
-           miejsce[m].hand[0]=talia.wylosowane[k];
+           pos[m].hand[0]=talia.wylosowane[k];
            k++;
-           miejsce[m].hand[1]=talia.wylosowane[k];
+           pos[m].hand[1]=talia.wylosowane[k];
            m++;
            k++;
        }
 
-       for(int kWs=0;kWs<tableCrt.length;kWs++)
+       for(int kWs = 0; tableCrt.length > kWs; kWs++)
        {
            tableCrt[kWs]= talia.wylosowane[cTs+kWs];
        }
    }
 
-   public void usiadz(int m, Player p)
+   public void usiadz(int m, tSock pos[])
    {
-       p.T.miejsce[m]=miejsce[m];
-       miejsce[m].zajete=true;
-       miejsce[m].stack=p.Stack;
+       pos[m].zajete=true;
    }
 
-   public void sprawdzMiejsca()
+   public void sprawdzMiejsca(tSock pos[], int ilosczajetych)
    {
-       for(int i=0;i<miejsce.length;i++)
+       for(int i=0;i<pos.length;i++)
        {
-           if (miejsce[i].zajete)
+           if (pos[i].zajete)
+           {
+               for (int j = 0; j < tableCrt.length; j++) {
+                   talia.showCrt(tableCrt[j]);
+                   System.out.println("");
+               }
                ilosczajetych++;
+           }
+
        }
    }
-   public void wyswietlMiejsce(int m)
+   public void wyswietlMiejsce(int m, tSock pos[])
    {
-       miejsce[m].status(talia);
-       System.out.println(miejsce[m].stack);
+       pos[m].status(talia);
+       System.out.println(pos[m].stack);
        for(int i=0;i< tableCrt.length;i++)
        {
            talia.showCrt(tableCrt[i]);
@@ -86,16 +95,11 @@ public class Table {
    }
     public void wyswietl()
     {
-        for(int i=0;i< miejsce.length;i++)
-        {
-            if(miejsce[i]!=null) {
-                miejsce[i].status(talia);
+            for(int i=0;i<= pos.length;i++)
+            {
+                pos[i].status(talia);
                 System.out.println("");
-
             }
-            else
-                System.out.println("Puste miejsce");
-        }
 
 
     }
