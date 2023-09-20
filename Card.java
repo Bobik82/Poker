@@ -1,5 +1,6 @@
 
-public class Card {
+public class Card
+{
     int v;
     int c;
     public Card(int i, int j)
