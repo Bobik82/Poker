@@ -1,13 +1,19 @@
+import java.util.Scanner;
 public class Table {
+	
+	Scanner scan = new Scanner(System.in);
+	int wybor;
 
    public Deck talia=new Deck();
     int idTable;
     public int Cws[];
-    public tSock []pos;
+    public Gracz []pos;
     public int wpisowe;
+    public static int SB=30;
+    public static int BB=60;
 
-    int blind;
-
+   public int pula;
+   public int tura=0;
   public int ilekart;
   public int x;
   
@@ -15,7 +21,6 @@ public class Table {
    {
        idTable=0;
        wpisowe=10;
-       blind=2;
        talia.initDeck();
        seatInit(x);
    }
@@ -35,16 +40,122 @@ public class Table {
 
     void seatInit(int max)
     {
-        pos=new tSock[max];
+        pos=new Gracz[max];
         Cws=new int[5];
         for(int i=0;i<pos.length;i++)
         {
-            pos[i]=new tSock(i);
+            pos[i]=new Gracz(i);
+            pos[i].position=i;
             pos[i].stack=wpisowe*100;
             ilekart=i*2+7;
+            if(pos[i].position==0)
+        	{
+        		pos[i].stack=pos[i].stack-SB;
+        		pula=pula+SB;
+        	}
+        	else if(pos[i].position==1)
+        	{
+        		pos[i].stack=pos[i].stack-BB;
+        		pula=pula+BB;
+        	}
         }
     }
-
+    public void preflop(int player)
+    {
+    	wyswietlMiejsce(player);
+		System.out.println();
+		ruch(player);
+    }
+    /*public void flop(int player)
+    {
+    	wyswietlMiejsce(player);
+		System.out.println();
+		wyswietlFlop();
+		System.out.println();
+		ruch(player);
+    }*/
+    /*public void turn(int player)
+    {
+    	wyswietlMiejsce(player);
+		System.out.println();
+		wyswietlTurn();
+		System.out.println();
+		ruch(player);
+    }
+    public void river(int player)
+    {
+    	wyswietlMiejsce(player);
+		System.out.println();
+		wyswietlRiver();
+		System.out.println();
+		ruch(player);
+    }*/
+    	
+    public void nexture(int player,int  t)
+    {
+    	/*tura=t;
+    	switch(tura)
+    	{
+    	case 0:*/
+    		preflop(player);
+    		/*break;
+    	case 1:
+    		//flop(player);
+    		break;
+    	case 2:
+    		//turn(player);
+    		break;
+    	case 3:
+    		//river(player);
+    		break;
+    		default:
+    			tura=0;
+    			break;
+    	}
+    	tura++;*/
+    }
+    public void ruch(int player)
+    {
+        System.out.println();
+        System.out.print(pos[player].position+":	0. Pas	1. Sprawdzenie	2. Podbicie");
+			wybor = scan.nextInt();
+        switch(wybor)
+        {
+        case 0:
+        	Fold(player);
+        	System.out.println("FOLD");
+        	break;
+        case 1:
+        	Call(player);
+        	System.out.println("CALL");
+        	//nexture(player, tura);
+        	break;
+        case 2:
+        	Race(player);
+        	System.out.println("Raise");
+        	//nexture(player, tura);
+        	break;
+        default:
+        	System.out.println("Bledny ruch");
+        	break;
+        }
+    }
+    
+   public void Fold(int player) 
+   {
+	   
+   }
+   public void Call(int player) 
+   {
+	   pos[player].stack=pos[player].stack-SB;
+	   pula=pula+SB;
+   }
+   public void Race(int player) 
+   {
+	   pos[player].stack=pos[player].stack-BB;
+	   pula=pula+BB;
+   }
+   
    public void rozdajKarty()
    {
 	  talia.wylosuj(ilekart);
@@ -64,10 +175,11 @@ public class Table {
 		  karta++;
 	  }
    }
+   
   
    
 
-   public void usiadz(int m, tSock pos[])
+   public void usiadz(int m, Gracz pos[])
    {
        pos[m].zajete=true;
    }
@@ -86,17 +198,38 @@ public class Table {
            }
 
        }
-   }
-   public void wyswietlMiejsce(int m, tSock pos[])
-   {
-       pos[m].status();
-       System.out.println(pos[m].stack);
-       for(int i=0;i< tableCrt.length;i++)
-       {
-           talia.showCrt(tableCrt[i]);
-           System.out.println("");
-       }
    }*/
+   public void wyswietlMiejsce(int Gracz)
+   {
+     pos[Gracz].showhand(talia);
+     System.out.println();
+     System.out.println("Pula: "+pula);
+   }
+   
+   public void wyswietlFlop()
+   {
+	   for(int i=0;i<3;i++)
+	   {
+		   talia.showCrt(Cws[i]);
+	   }
+   }
+   public void wyswietlTurn()
+   {
+	   for(int i=0;i<4;i++)
+	   {
+		   talia.showCrt(Cws[i]);
+	   }
+   }
+   
+   public void wyswietlRiver()
+   {
+	   for(int i=0;i<5;i++)
+	   {
+		   talia.showCrt(Cws[i]);
+	   }
+   }
+   
+   
     public void wyswietl()
     {
     	int i;
@@ -109,5 +242,7 @@ public class Table {
             {
                 talia.showCrt(Cws[z]);
             }
+            System.out.println();
+            System.out.println("Pula: "+pula);
     }
 }

@@ -1,26 +1,24 @@
-import java.awt.*;
+
 
 public class Game
 {
-
+	
     public Table t=new Table();
-    public Game()
+    public int tura=t.tura;
+    public Game(int iloscgraczy)
     {
-     gameInit(9);
+     gameInit(iloscgraczy);
  
      //t.pos[0].zajete=false;
      //t.pos[1].zajete=false;
      //t.pos[2].zajete=false;
      t.rozdajKarty();
-     t.wyswietl();
-    
     }
 
    void gameInit(int ileMiejsc)
     {
         t.seatInit(ileMiejsc);
     }
-
 
     void seatsStat()
     {
@@ -30,4 +28,18 @@ public class Game
         }
         System.out.println();
     }
+   
+    
+  /*public  void graj(int player)
+    {
+    		t.wyswietlMiejsce(player);
+    		System.out.println();
+    		t.ruch(player);
+    }*/
+  public void next(int player)
+  {
+	  t.nexture(player, tura);
+  }
 }
+
+    
